@@ -19,8 +19,8 @@
         const localSpeed = await measureSpeed(localTestUrl);
 
         document.getElementById("result").innerHTML = `
-        <p>Speed to US-WEST-2: ${serverSpeed} Mbps</p>
-        <p>Local Internet Speed: ${localSpeed} Mbps</p>
+        <p>Speed to US-WEST-2: ${serverSpeed}  s</p>
+        <p>Local Internet Speed: ${localSpeed} s </p>
       `;
       }
 
@@ -29,10 +29,8 @@
         const response = await fetch(url);
         const endTime = new Date().getTime();
         const duration = (endTime - startTime) / 1000;
-        const fileSize = response.headers.get("Content-Length") * 8; // in bits
-        const speedMbps = fileSize / duration / (1024 * 1024); // convert to Mbps
 
-        return speedMbps.toFixed(2);
+        return duration.toFixed(3);
       }
 
       async function measureSpeedServer(url) {
@@ -40,10 +38,8 @@
         const response = await fetch(url, { method: "POST" });
         const endTime = new Date().getTime();
         const duration = (endTime - startTime) / 1000;
-        const fileSize = response.headers.get("Content-Length") * 8; // in bits
-        const speedMbps = fileSize / duration / (1024 * 1024); // convert to Mbps
 
-        return speedMbps.toFixed(2);
+        return duration.toFixed(3);
       }
     </script>
   </body>
